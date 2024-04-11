@@ -130,4 +130,3 @@ We've added a small option, which removes the old images after each step is done
  
 [#img-contributors,link=https://github.com/OpenHD/OpenHD-ImageBuilder/graphs/contributors]
 image::https://contrib.rocks/image?repo=OpenHD/OpenHD-ImageBuilder[Contributors]
-
