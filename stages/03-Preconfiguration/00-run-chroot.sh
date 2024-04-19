@@ -18,6 +18,7 @@ if [[ "${OS}" == "radxa-debian-rock5a" ]] || [[ "${OS}" == "radxa-debian-rock5b"
     #allow offline auto detection of image format
     cp /usr/local/share/openhd_misc/issue.txt /conf/issue.txt
     cp /usr/local/share/openhd_misc/issue.txt /config/issue.txt
+    cat /opt/additionalFiles/issue-new.txt > /config/issue.txt
     mkdir -p /conf/openhd
     mkdir -p /config/openhd
     mkdir -p /boot/openhd
@@ -58,16 +59,18 @@ fi
 if [[ "${OS}" == "radxa-debian-rock-cm3" ]]; then
     systemctl disable dnsmasq
     sed -i 's/loglevel=4/loglevel=0/g' /boot/extlinux/extlinux.conf
-    echo 'echo "0" > /sys/class/leds/board-led/brightness' >> /root/.bashrc
+    echo 'led_sys.sh off' >> /root/.bashrc
     if [ ! -e emmc ]; then
     #autologin as root
     sudo sed -i 's/^ExecStart=.*/ExecStart=-\/sbin\/agetty --autologin root --noclear %I $TERM/' /lib/systemd/system/getty@.service
-    mv /usr/local/share/openhd_misc/issue.txt /conf/issue.txt
+    cp /opt/additionalFiles/issue-new.txt /conf/issue.txt
     else
-    mv /usr/local/share/openhd_misc/issue.txt /conf/issue.txt
+    cp /opt/additionalFiles/issue-new.txt /conf/issue.txt
     #autologin as root
     sudo sed -i 's/^ExecStart=.*/ExecStart=-\/sbin\/agetty --autologin root --noclear %I $TERM/' /lib/systemd/system/getty@.service
     #autocopy to emmc EXPERIMENTAL
+    echo 'led_sys.sh off' >> /root/.bashrc
+    echo "flash_emmc.sh" >> /root/.bashrc
     fi
 fi
 
@@ -78,6 +81,7 @@ fi
      #allow autologin and remove the raspberryos first boot menu
      cp /usr/local/share/openhd_misc/userconf.txt /boot/userconf.txt
      cp /usr/local/share/openhd_misc/default_raspi_config.txt /boot/config.txt
+     cat /opt/additionalFiles/issue-new.txt >> /boot/issue.txt
      cp /usr/local/share/openhd_misc/initPi.sh /usr/local/bin/initPi.sh
      #remove serial console
      sed -i /boot/cmdline.txt -e "s/console=ttyAMA0,[0-9]\+ //"
@@ -139,7 +143,7 @@ if [[ "${OS}" == "ubuntu-x86" ]] ; then
 
         #mounting config partition and adding config files
         sudo echo "UUID=4A7B-3DF7  /boot/openhd  auto  defaults  0  2" | sudo tee -a /etc/fstab
-        cp /usr/local/share/openhd_misc/issue.txt /conf/issue.txt
+        cp /opt/addtionalFiles/issue-new.txt /conf/issue.txt
         touch /conf/config.txt
         ls -a /conf
         mkdir -p /conf/openhd
