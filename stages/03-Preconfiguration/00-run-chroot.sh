@@ -183,7 +183,8 @@ echo "removed for now"
  sudo sed -i 's/c34bd5d7-bc89-4fa1-85b8-47954ecd28ee/9714ff09-1989-492f-a35e-29d9654c22d5/' /etc/fstab
  sudo echo "UUID=1A7D-9881  /external  auto  defaults  0  2" | sudo tee -a /etc/fstab
  sudo echo "UUID=e6c9676e-0cbc-41d4-8142-7d08a515c244  none  swap  sw  0  0" | sudo tee -a /etc/fstab
-
+ sudo echo "UUID=c34bd5d7-bc89-4fa1-85b8-47954ecd28ee / ext4 defaults 0 1" | sudo tee -a /etc/fstab
+ sudo sed -i '1d' /etc/fstab
 #  touch /etc/apt/sources.list
 #  apt update
 #  sed -i '17,35d' /etc/rc.local
