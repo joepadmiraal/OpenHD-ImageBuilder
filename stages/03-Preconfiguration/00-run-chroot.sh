@@ -71,6 +71,7 @@ if [[ "${OS}" == "radxa-debian-rock-cm3" ]]; then
     #autocopy to emmc EXPERIMENTAL
     echo 'led_sys.sh off' >> /root/.bashrc
     echo "flash_emmc.sh" >> /root/.bashrc
+    sudo sed -i 's/console=ttyS2,1500000n8//g' /boot/extlinux/extlinux.conf
     fi
 fi
 
