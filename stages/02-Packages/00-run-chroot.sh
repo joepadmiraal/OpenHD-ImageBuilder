@@ -31,14 +31,14 @@ function install_raspbian_packages {
 # Ubuntu-Rockship-specific code
 function install_radxa-ubuntu_packages {
     BASE_PACKAGES="openhd-sys-utils openhd apt-transport-https apt-utils open-hd-web-ui"
-    PLATFORM_PACKAGES="rsync qopenhd procps gstreamer1.0-plugins-bad gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-tools gstreamer1.0-rockchip1 gstreamer1.0-gl mali-g610-firmware malirun rockchip-multimedia-config librist4 librist-dev rist-tools libv4l-0 libv4l2rds0 libv4lconvert0 libv4l-dev libv4l-rkmpp qv4l2 v4l-utils librockchip-mpp1 librockchip-mpp-dev librockchip-vpu0 rockchip-mpp-demos librga2 librga-dev libegl-mesa0 libegl1-mesa-dev libgbm-dev libgl1-mesa-dev libgles2-mesa-dev libglx-mesa0 mesa-common-dev mesa-vulkan-drivers mesa-utils libwidevinecdm"
+    PLATFORM_PACKAGES="rsync procps gstreamer1.0-plugins-bad gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-tools gstreamer1.0-rockchip1 gstreamer1.0-gl mali-g610-firmware malirun rockchip-multimedia-config librist4 librist-dev rist-tools libv4l-0 libv4l2rds0 libv4lconvert0 libv4l-dev libv4l-rkmpp qv4l2 v4l-utils librockchip-mpp1 librockchip-mpp-dev librockchip-vpu0 rockchip-mpp-demos librga2 librga-dev libegl-mesa0 libegl1-mesa-dev libgbm-dev libgl1-mesa-dev libgles2-mesa-dev libglx-mesa0 mesa-common-dev mesa-vulkan-drivers mesa-utils libwidevinecdm"
 }
 
 function install_radxa-debian_packages {
-    BASE_PACKAGES="openhd-sys-utils openhd qopenhd-rk3566 apt-transport-https apt-utils open-hd-web-ui"
+    BASE_PACKAGES="openhd-sys-utils openhd qopenhd-rk3588 apt-transport-https apt-utils open-hd-web-ui"
     PLATFORM_PACKAGES_HOLD="r8125-dkms 8852bu-dkms 8852be-dkms task-rockchip radxa-system-config-rockchip linux-image-rock-5a linux-image-5.10.110-6-rockchip linux-image-5.10.110-11-rockchip"
     PLATFORM_PACKAGES_REMOVE="dkms sddm plymouth plasma-desktop kde*"
-    PLATFORM_PACKAGES="mpp-rk3566 rockchip-iq-openhd-r5 linux-headers-5.10.110-99-rockchip-g9c3b92612 linux-image-5.10.110-99-rockchip-g9c3b92612 rsync procps mpv camera-engine-rkaiq"
+    PLATFORM_PACKAGES="linux-headers-5.10.110-radxa-rockchip linux-image-5.10.110-radxa-rockchip rockchip-iq-openhd-r5 rsync procps mpv camera-engine-rkaiq mpp-rk3566 fpv-rk3566 "
 }
 function install_radxa-debian_packages_rk3566 {
     mkdir -p /usr/share/sddm/themes/breeze/
@@ -153,15 +153,6 @@ function install_openhd {
             exit 1
         fi
     done
-
-    #dirty hack for the 2.5 release to get rock5a working
-    if [[ "${OS}" == "radxa-debian-rock5a" ]]; then
-        apt install -y qopenhd-rk3588a
-    fi
-
-    if [[ "${OS}" == "radxa-debian-rock5b" ]]; then
-        apt install -y qopenhd-rk3588
-    fi
 
     # Clean up packages and cache
     echo "Cleaning up packages and cache..."
