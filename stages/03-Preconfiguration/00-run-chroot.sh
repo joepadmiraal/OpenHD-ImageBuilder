@@ -43,9 +43,7 @@ if [[ "${OS}" == "radxa-debian-rock5a" ]] || [[ "${OS}" == "radxa-debian-rock5b"
     sudo cp -r $source_dirB "/boot/dtbo/"
     sudo cp -r $source_dirC "/boot/dtbo/"
     sudo cp -r $source_dirD "/boot/dtbo/"
-    if [[ "${OS}" == "radxa-debian-rock5b" ]]; then
-        sudo apt install -y --force-yes --allow-change-held-packages r8125-dkms
-    fi
+
 fi
 
 if [[ "${OS}" == "radxa-ubuntu-rock5b" ]]; then
